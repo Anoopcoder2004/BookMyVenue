@@ -1,0 +1,30 @@
+<div class="login-wrapper">
+
+  <div class="login-card">
+
+    <h2>BookMyVenue</h2>
+    <p class="subtitle">Login to continue</p>
+
+    <input
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="email"
+    />
+
+    <input
+      type="password"
+      placeholder="Password"
+      [(ngModel)]="password"
+    />
+
+    <button (click)="login()" [disabled]="isLoading">
+      {{ isLoading ? 'Logging in...' : 'Login' }}
+    </button>
+
+    <p class="hint">
+      Demo: enter any email & password
+    </p>
+
+  </div>
+
+</div>

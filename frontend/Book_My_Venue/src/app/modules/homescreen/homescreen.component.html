@@ -1,0 +1,60 @@
+<nav class="navbar">
+
+  <!-- Left: Logo -->
+  <div class="logo">
+    <span>BookMyVenue</span>
+  </div>
+
+  <!-- Center: Search -->
+  <div class="search-box">
+    <input
+      type="text"
+      placeholder="Search venues, cafes, auditoriums..."
+      [(ngModel)]="searchText"
+      (keyup.enter)="onSearch()"
+    />
+    <button (click)="onSearch()">Search</button>
+  </div>
+
+  <!-- Right: Links -->
+  <div class="nav-links">
+    <a routerLink="/">Home</a>
+    <a routerLink="/venues">Venues</a>
+    <a routerLink="/login" class="btn">Login</a>
+  </div>
+
+</nav>
+<div class="container">
+
+  <h2 class="title">Available Venues</h2>
+
+  <div class="grid">
+
+    <div class="card" *ngFor="let venue of venues">
+
+      <img [src]="venue.image" alt="venue" />
+
+      <div class="card-body">
+
+        <h3>{{ venue.name }}</h3>
+
+        <p class="location">
+          📍 {{ venue.location }}
+        </p>
+
+        <p class="type">
+          {{ venue.type }}
+        </p>
+
+        <div class="bottom">
+          <span class="price">₹{{ venue.price }}/day</span>
+          <button>View</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
