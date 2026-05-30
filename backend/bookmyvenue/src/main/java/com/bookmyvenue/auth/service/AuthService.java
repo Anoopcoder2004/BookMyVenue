@@ -1,10 +1,11 @@
 package com.bookmyvenue.auth.service;
 
 import com.bookmyvenue.auth.dto.*;
+import com.bookmyvenue.common.response.ApiResponse;
 
 public interface AuthService {
 
-    AuthResponse signup(SignupRequest request);
+    ApiResponse<AuthResponse> signup(SignupRequest request);
 
-    AuthResponse login(LoginRequest request);
+    ApiResponse<AuthResponse> login(LoginRequest request);
 }

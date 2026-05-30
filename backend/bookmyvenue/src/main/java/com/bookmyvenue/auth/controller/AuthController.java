@@ -2,6 +2,8 @@ package com.bookmyvenue.auth.controller;
 
 import com.bookmyvenue.auth.dto.*;
 import com.bookmyvenue.auth.service.AuthService;
+import com.bookmyvenue.common.response.ApiResponse;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,14 +16,16 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public AuthResponse signup(@RequestBody SignupRequest request) {
+    public ApiResponse<AuthResponse> signup(@RequestBody SignupRequest request) {
         return authService.signup(request);
     }
 
+
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest request) {
-        return authService.login(request);
-    }
+public ApiResponse<AuthResponse> login(@RequestBody LoginRequest request) {
+    System.out.println("login api hit");
+    return authService.login(request);
+}
 
     @GetMapping("/me")
     public AuthResponse getMe(HttpServletRequest request) {

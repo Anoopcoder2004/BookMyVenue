@@ -1,5 +1,11 @@
 import { CanActivateFn } from '@angular/router';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  return true;
+
+  const token = localStorage.getItem('token');
+
+  if (token) return true;
+
+  window.location.href = '/login';
+  return false;
 };

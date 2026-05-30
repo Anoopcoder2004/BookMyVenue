@@ -1,1 +1,35 @@
-<p>signup works!</p>
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <h2>BookMyVenue</h2>
+        <p class="subtitle">Create an account</p>
+
+        <input type="text" placeholder="Name" [(ngModel)]="name" />
+
+        <input type="email" placeholder="Email" [(ngModel)]="email" />
+
+        <input type="password" placeholder="Password" [(ngModel)]="password" />
+
+        <!-- optional role -->
+        <select [(ngModel)]="role">
+            <option *ngFor="let r of roles" [value]="r.value">
+                {{ r.label }}
+            </option>
+        </select>
+
+        <button (click)="onSignup()" [disabled]="isLoading">
+            {{ isLoading ? 'Creating...' : 'Sign Up' }}
+        </button>
+
+        <p class="hint">
+            Enter details to create account
+        </p>
+
+        <p class="hint" *ngIf="error" style="color:red;">
+            {{ error }}
+        </p>
+
+    </div>
+
+</div>
