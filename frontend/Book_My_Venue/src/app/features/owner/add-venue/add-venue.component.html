@@ -1,1 +1,38 @@
-<p>add-venue works!</p>
+<div class="add-venue-container">
+  <h2>Add New Venue</h2>
+
+  <form [formGroup]="venueForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label>Venue Name</label>
+      <input type="text" formControlName="name" placeholder="Enter venue name">
+    </div>
+
+    <div class="form-group">
+      <label>Location</label>
+      <input type="text" formControlName="location" placeholder="Enter location">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Price</label>
+        <input type="number" formControlName="price" placeholder="Enter price">
+      </div>
+
+      <div class="form-group">
+        <label>Capacity</label>
+        <input type="number" formControlName="capacity" placeholder="Enter capacity">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea formControlName="description" rows="4" placeholder="Enter description"></textarea>
+    </div>
+
+    <button type="submit" [disabled]="venueForm.invalid">
+      Add Venue
+    </button>
+
+  </form>
+</div>

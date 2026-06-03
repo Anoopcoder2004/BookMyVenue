@@ -1,1 +1,42 @@
-<p>venue-details works!</p>
+<nav class="navbar glass">
+
+  <div class="logo">
+    BookMyVenue
+  </div>
+
+  <div class="search-box">
+    <input type="text" placeholder="Search venues..." />
+  </div>
+
+  <div class="nav-actions">
+    <span class="icon">🔔</span>
+    <img 
+      src="https://cdn-icons-png.flaticon.com/512/149/149071.png" 
+      class="profile"
+    />
+  </div>
+
+</nav>
+<div class="venue-container">
+  <div class="venue-card" *ngFor="let venue of venues">
+
+    <img [src]="venue.images" alt="venue image" class="venue-img" />
+
+    <div class="venue-content">
+      <h2>{{ venue.name }}</h2>
+      <p class="location">📍 {{ venue.address }}</p>
+
+      <p class="desc">{{ venue.description }}</p>
+
+      <div class="details">
+        <span>👥 Capacity: {{ venue.capacity }}</span>
+        <span>💰 ₹{{ venue.pricePerDay }}</span>
+      </div>
+
+      <button class="book-btn" (click)="bookVenue(venue)">
+        Book Now
+      </button>
+    </div>
+
+  </div>
+</div>

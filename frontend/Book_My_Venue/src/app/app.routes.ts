@@ -9,6 +9,7 @@ import { VenueDetailsComponent } from './features/user/venue-details/venue-detai
 import { AdminDashboardComponent } from './features/admin/dashboard/dashboard.component';
 import { DashboardComponent } from './features/owner/dashboard/dashboard.component';
 import { Component } from '@angular/core';
+import { AddVenueComponent } from './features/owner/add-venue/add-venue.component';
 
 
 export const routes: Routes = [
@@ -45,6 +46,11 @@ export const routes: Routes = [
     path: 'venue-details',
     component: VenueDetailsComponent
   },
+  {
+    path: 'owner-dashboard/add-venue',
+    component: AddVenueComponent
+  },
+
 
   {
     path: '**',

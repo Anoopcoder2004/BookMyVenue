@@ -1,0 +1,41 @@
+.dashboard-container {
+  padding: 30px;
+  color: #fff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+h2 {
+  background: linear-gradient(90deg, #a855f7, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+
+  background: linear-gradient(90deg, #a855f7, #7c3aed);
+  color: white;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+
+.content {
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}

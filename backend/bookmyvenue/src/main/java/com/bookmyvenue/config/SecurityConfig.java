@@ -45,14 +45,15 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         // DEV ONLY (allow all origins)
-        config.setAllowedOrigins(List.of("*"));
+        // when using cookies, allowed origins must be explicit
+        config.setAllowedOrigins(List.of("http://localhost:49976"));
 
         config.setAllowedMethods(List.of("*"));
 
         config.setAllowedHeaders(List.of("*"));
 
-        // MUST be false when using "*"
-        config.setAllowCredentials(false);
+        // required for cookies
+         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);

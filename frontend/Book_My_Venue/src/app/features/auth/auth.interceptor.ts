@@ -8,18 +8,25 @@ import {
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  intercept(req: any, next: any) {
+  // intercept(req: any, next: any) {
 
-    const token = localStorage.getItem('token');
+  //   const token = localStorage.getItem('token');
 
-    if (token) {
-      req = req.clone({
-        setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-    }
+  //   if (token) {
+  //     req = req.clone({
+  //       setHeaders: {
+  //         Authorization: `Bearer ${token}`
+  //       }
+  //     });
+  //   }
 
-    return next.handle(req);
-  }
+  //   return next.handle(req);
+  // }
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
+  const cloned = req.clone({
+    withCredentials: true
+  });
+
+  return next.handle(cloned);
+}
 }
