@@ -2,12 +2,15 @@ package com.bookmyvenue.venue.controller;
 
 import com.bookmyvenue.common.entity.Venue;
 import com.bookmyvenue.common.enums.VenueStatus;
+import com.bookmyvenue.venue.dto.MyVenueDto;
 import com.bookmyvenue.venue.service.VenueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/venues")
@@ -66,5 +69,13 @@ public Page<Venue> searchVenues(
     Pageable pageable = PageRequest.of(page, size);
     
     return venueService.searchVenues(name, city, status, pageable);
+}
+@PreAuthorize("hasRole('OWNER')")
+@GetMapping("/my-venues")
+public Page<MyVenueDto> getMyVenues(
+    @RequestParam int page,
+    @RequestParam int size
+    ) {
+    return venueService.getMyVenues(page,size);
 }
 }

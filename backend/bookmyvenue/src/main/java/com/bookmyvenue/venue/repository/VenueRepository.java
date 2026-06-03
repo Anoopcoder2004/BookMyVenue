@@ -15,7 +15,7 @@ public interface VenueRepository extends JpaRepository<Venue, Long> {
 
     Page<Venue> findByCityAndStatus(String city, VenueStatus status, Pageable pageable);
 
-    List<Venue> findByOwnerId(Long ownerId);
+    Page<Venue> findByOwnerId(Long ownerId,Pageable pageable);
 
     @Query("""
                 SELECT v FROM Venue v
