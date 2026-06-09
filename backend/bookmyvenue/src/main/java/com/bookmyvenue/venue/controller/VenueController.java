@@ -39,6 +39,9 @@ public Page<Venue> getVenues(
     // 🔹 3. Create new venue (OWNER)
     @PostMapping
     public Venue createVenue(@RequestBody Venue venue) {
+          System.out.println("=== CREATE VENUE START ===");
+    System.out.println("Incoming ID: " + venue.getId());
+    System.out.println("Incoming Status: " + venue.getStatus());
         return venueService.createVenue(venue);
     }
 

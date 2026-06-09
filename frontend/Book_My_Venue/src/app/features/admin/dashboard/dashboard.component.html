@@ -1,1 +1,57 @@
-<p>dashboard works!</p>
+<div class="container mt-3">
+
+  <h3>Pending Venues</h3>
+
+  <table class="table table-bordered table-hover mt-3">
+
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>City</th>
+        <th>Capacity</th>
+        <th>Owner</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let v of venues">
+
+        <td>{{ v.name }}</td>
+        <td>{{ v.city || 'N/A' }}</td>
+        <td>{{ v.capacity }}</td>
+
+        <td>
+          {{ v.owner?.name || 'Unknown' }}
+        </td>
+
+        <td>
+          <span class="badge bg-warning text-dark">
+            {{ v.status }}
+          </span>
+        </td>
+
+        <td>
+          <button class="btn btn-success btn-sm me-2"
+                  (click)="approve(v.id)">
+            Approve
+          </button>
+
+          <button class="btn btn-danger btn-sm"
+                  (click)="reject(v.id)">
+            Reject
+          </button>
+        </td>
+
+      </tr>
+      <tr *ngIf="venues.length === 0">
+  <td colspan="6" class="text-center">
+    No pending venues 🎉
+  </td>
+</tr>
+    </tbody>
+
+  </table>
+
+</div>

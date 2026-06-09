@@ -103,4 +103,33 @@ public Page<MyVenueDto> getMyVenues(int page, int size) {
     ) {
         return venueRepository.searchVenues(name, city, status, pageable);
     }
+    @Override
+public void approveVenue(Long id) {
+    Venue venue = venueRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Venue not found"));
+
+    venue.setStatus(VenueStatus.APPROVED);
+    venue.setRejectionReason(null); // clear if previously rejected
+
+    venueRepository.save(venue);
+}
+@Override
+public void rejectVenue(Long id, String reason) {
+    Venue venue = venueRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Venue not found"));
+
+    venue.setStatus(VenueStatus.REJECTED);
+    venue.setRejectionReason(reason);
+
+    venueRepository.save(venue);
+}
+
+@Override
+public Page<Venue> getPendingVenues(int page, int size) {
+
+    return venueRepository.findByStatus(
+            VenueStatus.PENDING,
+            PageRequest.of(page, size)
+    );
+}
 }

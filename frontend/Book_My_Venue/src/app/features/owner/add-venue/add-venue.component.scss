@@ -1,0 +1,97 @@
+/* Container */
+.add-venue-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background: linear-gradient(145deg, #0f0f1a, #1a0f2e);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+/* Title */
+.add-venue-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 24px;
+  color: #c084fc;
+  letter-spacing: 1px;
+}
+
+/* Form layout */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Input groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.form-group label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #d1d5db;
+}
+
+/* Inputs + textarea */
+.form-group input,
+.form-group textarea {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  background: #0b0b14;
+  color: #fff;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+/* Focus effect */
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #a855f7;
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.5);
+}
+
+/* Two-column row */
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+/* Make inputs in row equal width */
+.form-row .form-group {
+  flex: 1;
+}
+
+/* Button */
+button {
+  margin-top: 10px;
+  padding: 12px;
+  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+/* Button hover */
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4);
+}
+
+/* Disabled button */
+button:disabled {
+  background: #333;
+  cursor: not-allowed;
+  opacity: 0.6;
+}

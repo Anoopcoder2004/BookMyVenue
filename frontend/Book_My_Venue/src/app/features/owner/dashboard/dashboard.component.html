@@ -8,6 +8,35 @@
   </div>
 
   <div class="content">
-    <p>Your venues will appear here...</p>
+
+    <!-- 🔥 VENUE LIST -->
+    <div class="venue-grid">
+
+      <div class="venue-card" *ngFor="let venue of venues">
+        <h3>{{ venue.name }}</h3>
+
+        <p><strong>Capacity:</strong> {{ venue.capacity }}</p>
+        <p><strong>Status:</strong> {{ venue.status }}</p>
+
+        <button class="view-btn">
+          View
+        </button>
+      </div>
+
+    </div>
+
+    <!-- 🔥 PAGINATION -->
+    <div class="pagination">
+      <button  [disabled]="page === 0">
+        Prev
+      </button>
+
+      <span>Page {{ page + 1 }} / {{ totalPages }}</span>
+
+      <button (click)="nextPage()" [disabled]="page >= totalPages - 1">
+        Next
+      </button>
+    </div>
+
   </div>
 </div>

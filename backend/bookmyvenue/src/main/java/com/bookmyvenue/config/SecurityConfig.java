@@ -45,8 +45,9 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         // DEV ONLY (allow all origins)
-        // when using cookies, allowed origins must be explicit
-        config.setAllowedOrigins(List.of("http://localhost:49976"));
+            // ✅ Allow ALL localhost ports
+    config.setAllowedOriginPatterns(List.of("http://localhost:*"));
+
 
         config.setAllowedMethods(List.of("*"));
 

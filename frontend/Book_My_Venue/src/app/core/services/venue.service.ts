@@ -31,4 +31,10 @@ export class VenueService {
   createVenue(venue: any): Observable<any> {
     return this.http.post(this.baseUrl, venue);
   }
-}
+  // for owners to see their venues 
+  // 🔥 Get logged-in owner's venues (paginated)
+  getMyVenues(page: number = 0, size: number = 5): Observable<any> {
+    return this.http.get<any>(
+      `${this.baseUrl}/my-venues?page=${page}&size=${size}`
+    );
+  }}

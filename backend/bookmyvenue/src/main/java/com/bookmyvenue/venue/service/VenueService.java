@@ -7,7 +7,6 @@ import com.bookmyvenue.venue.dto.MyVenueDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-
 import java.util.List;
 
 public interface VenueService {
@@ -18,7 +17,10 @@ public interface VenueService {
 
     Venue createVenue(Venue venue);
 
-    
+    void approveVenue(Long id);
+
+    void rejectVenue(Long id, String reason);
+
     // 🔥 Get ONLY logged-in owner's venues
     // ❌ No ownerId parameter → prevents security issues
     Page<MyVenueDto> getMyVenues(int page, int size);
@@ -26,12 +28,13 @@ public interface VenueService {
     // 🗑️ Delete venue (later you should also check ownership here)
 
     void deleteVenue(Long id);
-        Page<Venue> searchVenues(
+
+    Page<Venue> searchVenues(
             String name,
             String city,
             VenueStatus status,
-            Pageable pageable
-    );
+            Pageable pageable);
 
+    Page<Venue> getPendingVenues(int page, int size);
 
 }

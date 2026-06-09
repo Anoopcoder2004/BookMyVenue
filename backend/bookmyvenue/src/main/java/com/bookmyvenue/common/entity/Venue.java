@@ -39,6 +39,8 @@ public class Venue {
 
     private LocalDateTime createdAt;
 
+    private String rejectionReason;
+
     // 🔗 RELATIONSHIPS
 
     // Many venues belong to one user (owner)
@@ -59,7 +61,6 @@ public class Venue {
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();
-
         // default status when created
         if (this.status == null) {
             this.status = VenueStatus.PENDING;
