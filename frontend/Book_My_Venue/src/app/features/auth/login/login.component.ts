@@ -15,6 +15,8 @@ export class LoginComponent {
   password: string = '';
   isLoading = false;
   error: string = '';
+    showPassword = false;
+
 
 
   constructor(
@@ -22,50 +24,51 @@ export class LoginComponent {
     private authService: AuthService
   ) { }
 
-onLogin() {
-  this.isLoading = true;
+  onLogin() {
+    this.isLoading = true;
 
-  this.authService.login({
-    email: this.email,
-    password: this.password
-  }).subscribe({
-    next: (res) => {
-      debugger;
+    this.authService.login({
+      email: this.email,
+      password: this.password
+    }).subscribe({
+      next: (res) => {
+        const { token, role } = res.data;
 
-      const { token, role } = res.data;
+        localStorage.setItem('token', token);
+        localStorage.setItem('role', role);
 
-      // ✅ store
-      localStorage.setItem('token', token);
-      localStorage.setItem('role', role);
+        this.isLoading = false; // ✅ add this
 
-      // ✅ ROLE-BASED REDIRECTION
-      this.redirectByRole(role);
-
-    },
-    error: () => {
-      this.error = 'Invalid credentials';
-      this.isLoading = false;
-    }
-  });
-}
-  goToSignup() {
-  this.router.navigate(['/signup']);
-}
-redirectByRole(role: string) {
-
-  switch (role) {
-    case 'ADMIN':
-      this.router.navigate(['/admin-dashboard']);
-      break;
-
-    case 'OWNER':
-      this.router.navigate(['/owner-dashboard']);
-      break;
-
-    case 'USER':
-    default:
-      this.router.navigate(['/venue-details']);
-      break;
+        this.redirectByRole(role);
+      },
+      error: () => {
+        this.error = 'Invalid credentials';
+        this.isLoading = false;
+      }
+    });
   }
+  goToSignup() {
+    this.router.navigate(['/signup']);
+  }
+  redirectByRole(role: string) {
+
+    switch (role) {
+      case 'ADMIN':
+        this.router.navigate(['/admin-dashboard']);
+        break;
+
+      case 'OWNER':
+        this.router.navigate(['/owner-dashboard']);
+        break;
+
+      case 'USER':
+      default:
+        this.router.navigate(['/venue-details']);
+        break;
+    }
+  }
+
+togglePassword() {
+  this.showPassword = !this.showPassword;
 }
 }

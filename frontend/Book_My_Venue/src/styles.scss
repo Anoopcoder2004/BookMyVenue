@@ -1,4 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111111;
+  --primary-color: #facc15; /* yellow */
+  --secondary-color: #000000;
+}
+.dark-theme {
+  --bg-color: #111111;
+  --text-color: #ffffff;
+  --primary-color: #eab308;
+  --secondary-color: #facc15;}
+  /* You can add global styles to this file, and also import other style files */
 /* styles.css */
 
 body {
@@ -13,4 +24,10 @@ body {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border-radius: 12px;
+}
+/* autofill fix */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #1a1a1a inset;
+  -webkit-text-fill-color: #fff;
+  transition: background-color 5000s ease-in-out 0s;
 }
