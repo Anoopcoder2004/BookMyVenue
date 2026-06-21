@@ -1,129 +1,120 @@
-/* 🌌 Global Theme */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #000000, #400094);
+  font-family: sans-serif;
+  background: #0b0d08;
   color: #fff;
 }
 
-/* 🧭 Navbar */
+/* 🔹 Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 25px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  padding: 16px 24px;
 
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: #111;
+  border-bottom: 1px solid #222;
 }
 
 .logo {
   font-weight: bold;
-  font-size: 20px;
-  color: #ffd700;
+  color: #d4ff00;
 }
 
 .search-box input {
+  width: 220px;
   padding: 8px 12px;
-  border-radius: 20px;
-  border: none;
+  border-radius: 6px;
+
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
   outline: none;
-  width: 250px;
-
-  background: rgba(255,255,255,0.1);
-  color: white;
 }
 
-.search-box input::placeholder {
-  color: #ccc;
-}
-
+/* 🔹 Nav actions */
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
 .profile {
-  width: 35px;
-  height: 35px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  cursor: pointer;
 }
 
-/* 🏢 Venue Grid */
+/* 🔹 Grid */
 .venue-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
   padding: 20px;
 }
 
-/* ✨ Glass Card */
+/* 🔹 Card */
 .venue-card {
-  background: rgba(255,255,255,0.07);
-  backdrop-filter: blur(12px);
-  border-radius: 15px;
+  background: #111;
+  border-radius: 10px;
   overflow: hidden;
 
-  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-  transition: 0.3s;
+  border: 1px solid #222;
+  transition: 0.2s;
 }
 
 .venue-card:hover {
-  transform: translateY(-6px) scale(1.02);
+  transform: translateY(-4px);
 }
 
-/* 🖼 Image */
+/* 🔹 Image */
 .venue-img {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
 }
 
-/* 📦 Content */
+/* 🔹 Content */
 .venue-content {
-  padding: 15px;
+  padding: 12px;
 }
 
 .location {
-  color: #ccc;
-  font-size: 14px;
+  font-size: 12px;
+  color: #888;
 }
 
 .desc {
-  margin: 10px 0;
-  font-size: 14px;
-  color: #ddd;
+  font-size: 13px;
+  color: #aaa;
+  margin: 8px 0;
 }
 
+/* 🔹 Details */
 .details {
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
+}
+
+.price {
+  color: #d4ff00;
   font-weight: bold;
 }
 
-/* 🚀 Button Upgrade */
-.book-btn {
+/* 🔹 Button */
+.venue-card button {
   width: 100%;
-  padding: 10px;
-
-  background: linear-gradient(135deg, #400094, #000);
-  color: #fff;
-
+  padding: 8px;
+  border-radius: 6px;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
+
+  background: #d4ff00;
+  color: #000;
   font-weight: bold;
-
-  transition: 0.3s;
-}
-
-.book-btn:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 10px rgba(128, 0, 255, 0.6);
+  cursor: pointer;
 }

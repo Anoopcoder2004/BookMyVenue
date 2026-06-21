@@ -12,7 +12,7 @@ export class VenueService {
   constructor(private http: HttpClient) {}
 
   // 🔹 1. Get all venues
-  getVenues(page: number = 0, size: number = 10, city?: string): Observable<any> {
+  getVenues(page: number = 0, size: number = 1000, city?: string): Observable<any> {
     let url = `${this.baseUrl}?page=${page}&size=${size}`;
 
     if (city) {

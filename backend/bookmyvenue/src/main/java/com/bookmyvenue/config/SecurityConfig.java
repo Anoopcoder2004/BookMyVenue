@@ -28,9 +28,14 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()
-                        .anyRequest().authenticated()
-                )
+                        .requestMatchers(
+                                "/auth/**",
+                                "/uploads/**",
+                                "/files/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**")
+                        .permitAll()
+                        .anyRequest().authenticated())
 
                 .addFilterBefore(jwtFilter,
                         org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
@@ -45,16 +50,15 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         // DEV ONLY (allow all origins)
-            // ✅ Allow ALL localhost ports
-    config.setAllowedOriginPatterns(List.of("http://localhost:*"));
-
+        // ✅ Allow ALL localhost ports
+        config.setAllowedOriginPatterns(List.of("http://localhost:*"));
 
         config.setAllowedMethods(List.of("*"));
 
         config.setAllowedHeaders(List.of("*"));
 
         // required for cookies
-         config.setAllowCredentials(true);
+        config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);

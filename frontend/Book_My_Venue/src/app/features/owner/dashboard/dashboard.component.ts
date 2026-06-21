@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit{
 
   // 🔥 pagination state
   page = 0;
-  size = 5;
+  size = 20;
   totalPages = 0;
 
 

@@ -33,12 +33,12 @@ public class Booking {
 
     // Many bookings belong to one user
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     // Many bookings belong to one venue
     @ManyToOne
-    @JoinColumn(name = "venue_id")
+    @JoinColumn(name = "venue_id", nullable = false)
     private Venue venue;
 
     // 🔥 Auto set values before insert

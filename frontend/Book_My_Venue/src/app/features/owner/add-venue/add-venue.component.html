@@ -29,6 +29,29 @@
       <label>Description</label>
       <textarea formControlName="description" rows="4" placeholder="Enter description"></textarea>
     </div>
+    <div class="form-group">
+  <label>Upload Images (1–5)</label>
+
+  <input 
+    type="file" 
+    multiple 
+    accept="image/*"
+    (change)="onFileSelect($event)"
+  />
+
+  <!-- Preview -->
+  <div class="preview-grid">
+    <div class="preview-item" *ngFor="let img of previews; let i = index">
+      <img [src]="img" />
+      <button type="button" (click)="removeImage(i)">✕</button>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <p class="error" *ngIf="imageError">
+    {{ imageError }}
+  </p>
+</div>
 
     <button type="submit" [disabled]="venueForm.invalid">
       Add Venue

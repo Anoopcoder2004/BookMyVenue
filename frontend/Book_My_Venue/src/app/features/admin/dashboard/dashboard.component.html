@@ -1,57 +1,50 @@
-<div class="container mt-3">
+<div class="venue-container">
 
-  <h3>Pending Venues</h3>
+  <div class="venue-card" *ngFor="let v of venues">
 
-  <table class="table table-bordered table-hover mt-3">
+    <!-- IMAGE -->
+    <img 
+      [src]="v.images?.[0]?.imageUrl || 'assets/default.jpg'" 
+      class="venue-img"
+    />
 
-    <thead class="table-dark">
-      <tr>
-        <th>Name</th>
-        <th>City</th>
-        <th>Capacity</th>
-        <th>Owner</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
+    <!-- CONTENT -->
+    <div class="venue-content">
+      <h3>{{ v.name }}</h3>
 
-    <tbody>
-      <tr *ngFor="let v of venues">
+      <p class="location">📍 {{ v.city || 'N/A' }}</p>
 
-        <td>{{ v.name }}</td>
-        <td>{{ v.city || 'N/A' }}</td>
-        <td>{{ v.capacity }}</td>
+      <p class="desc">
+        Owner: {{ v.owner?.name || 'Unknown' }}
+      </p>
 
-        <td>
-          {{ v.owner?.name || 'Unknown' }}
-        </td>
+      <div class="details">
+        <span>👥 {{ v.capacity }}</span>
+      </div>
 
-        <td>
-          <span class="badge bg-warning text-dark">
-            {{ v.status }}
-          </span>
-        </td>
+      <!-- STATUS -->
+      <span class="status pending">
+        {{ v.status }}
+      </span>
 
-        <td>
-          <button class="btn btn-success btn-sm me-2"
-                  (click)="approve(v.id)">
-            Approve
-          </button>
+      <!-- ACTIONS -->
+      <div class="actions">
+        <button class="approve" (click)="approve(v.id)">
+          Approve
+        </button>
 
-          <button class="btn btn-danger btn-sm"
-                  (click)="reject(v.id)">
-            Reject
-          </button>
-        </td>
+        <button class="reject" (click)="reject(v.id)">
+          Reject
+        </button>
+      </div>
 
-      </tr>
-      <tr *ngIf="venues.length === 0">
-  <td colspan="6" class="text-center">
+    </div>
+
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div *ngIf="venues.length === 0" class="empty">
     No pending venues 🎉
-  </td>
-</tr>
-    </tbody>
-
-  </table>
+  </div>
 
 </div>

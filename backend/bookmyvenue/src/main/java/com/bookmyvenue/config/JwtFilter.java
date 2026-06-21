@@ -21,8 +21,8 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain)
+            HttpServletResponse response,
+            FilterChain filterChain)
             throws ServletException, IOException {
 
         System.out.println("👉 JWT FILTER HIT: " + request.getServletPath());
@@ -30,14 +30,24 @@ public class JwtFilter extends OncePerRequestFilter {
         String path = request.getServletPath();
 
         // 🔥 IMPROVED: skip more public endpoints
-        if (path.startsWith("/auth/") || path.startsWith("/error")) {
+        if (path.startsWith("/auth/") ||
+                path.startsWith("/uploads") ||
+                path.startsWith("/error") ||
+                path.startsWith("/v3/api-docs") ||
+                path.startsWith("/swagger-ui"))
+
+        {
             System.out.println("✔ SKIPPING JWT FILTER FOR PUBLIC ENDPOINT");
             filterChain.doFilter(request, response);
             return;
         }
 
         // 🔥 NEW: Get token from cookie
-        String token = getTokenFromCookie(request);
+        String token = getTokenFromHeader(request);
+
+        if (token == null) {
+            token = getTokenFromCookie(request);
+        }
 
         if (token != null) {
             System.out.println("✔ TOKEN FOUND (COOKIE)");
@@ -55,15 +65,12 @@ public class JwtFilter extends OncePerRequestFilter {
                     // request.setAttribute("role", role);
 
                     // 🔥 Convert role → ROLE_XXX
-                    SimpleGrantedAuthority authority =
-                            new SimpleGrantedAuthority("ROLE_" + role);
+                    SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
 
-                    UsernamePasswordAuthenticationToken auth =
-                            new UsernamePasswordAuthenticationToken(
-                                    userId,
-                                    null,
-                                    List.of(authority)
-                            );
+                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                            userId,
+                            null,
+                            List.of(authority));
 
                     // 🔥 NEW: Prevent overriding existing authentication
                     if (SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -88,12 +95,22 @@ public class JwtFilter extends OncePerRequestFilter {
 
     // 🔥 SAME (GOOD): Extract JWT from cookie
     private String getTokenFromCookie(HttpServletRequest request) {
-        if (request.getCookies() == null) return null;
+        if (request.getCookies() == null)
+            return null;
 
         for (Cookie c : request.getCookies()) {
             if ("jwt".equals(c.getName())) {
                 return c.getValue();
             }
+        }
+        return null;
+    }
+
+    private String getTokenFromHeader(HttpServletRequest request) {
+        String authHeader = request.getHeader("Authorization");
+
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            return authHeader.substring(7); // remove "Bearer "
         }
         return null;
     }

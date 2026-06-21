@@ -82,12 +82,19 @@ public Page<MyVenueDto> getMyVenues(int page, int size) {
         );
 
     // 🔥 Only fetch this user's venues
-    return venues.map(v -> new MyVenueDto(
-        v.getId(),
-        v.getName(),
-        v.getCapacity(),
-        v.getStatus().name()
-    ));
+  return venues.map(v -> new MyVenueDto(
+    v.getId(),
+    v.getName(),
+    v.getCapacity(),
+    v.getStatus().name(),
+    v.getAddress(),
+    v.getPricePerDay(),
+    v.getDescription(),
+    v.getImages()
+        .stream()
+        .map(img -> img.getImageUrl()) 
+        .toList()
+));
 }
 
     @Override

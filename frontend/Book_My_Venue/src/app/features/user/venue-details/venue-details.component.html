@@ -1,8 +1,5 @@
-<nav class="navbar glass">
-
-  <div class="logo">
-    BookMyVenue
-  </div>
+<nav class="navbar">
+  <div class="logo">BookMyVenue</div>
 
   <div class="search-box">
     <input type="text" placeholder="Search venues..." />
@@ -15,25 +12,27 @@
       class="profile"
     />
   </div>
-
 </nav>
+
 <div class="venue-container">
   <div class="venue-card" *ngFor="let venue of venues">
 
-    <img [src]="venue.images" alt="venue image" class="venue-img" />
-
+<img 
+  [src]="venue.images?.[0]?.imageUrl || 'assets/default.jpg'" 
+  class="venue-img"
+/>
     <div class="venue-content">
-      <h2>{{ venue.name }}</h2>
+      <h3>{{ venue.name }}</h3>
       <p class="location">📍 {{ venue.address }}</p>
 
       <p class="desc">{{ venue.description }}</p>
 
       <div class="details">
-        <span>👥 Capacity: {{ venue.capacity }}</span>
-        <span>💰 ₹{{ venue.pricePerDay }}</span>
+        <span>👥 {{ venue.capacity }}</span>
+        <span class="price">₹{{ venue.pricePerDay }}</span>
       </div>
 
-      <button class="book-btn" (click)="bookVenue(venue)">
+      <button (click)="bookVenue(venue)">
         Book Now
       </button>
     </div>

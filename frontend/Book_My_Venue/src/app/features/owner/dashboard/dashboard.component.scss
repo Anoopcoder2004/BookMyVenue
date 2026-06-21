@@ -1,41 +1,198 @@
-.dashboard-container {
-  padding: 30px;
+/* 🔹 Base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #0b0d08;
   color: #fff;
 }
 
-.header {
+/* 🔹 Navbar */
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
+  padding: 16px 24px;
+
+  background: #111;
+  border-bottom: 1px solid #222;
 }
 
-h2 {
-  background: linear-gradient(90deg, #a855f7, #7c3aed);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.logo {
+  font-weight: bold;
+  color: #d4ff00;
 }
 
-button {
-  padding: 10px 16px;
-  border-radius: 8px;
+.search-box input {
+  width: 220px;
+  padding: 8px 12px;
+  border-radius: 6px;
+
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  outline: none;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+/* 🔹 Add button */
+.add-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
   border: none;
-  cursor: pointer;
 
-  background: linear-gradient(90deg, #a855f7, #7c3aed);
-  color: white;
-  font-weight: 600;
+  background: #d4ff00;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 🔹 Grid */
+.venue-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  padding: 20px;
+}
+
+/* 🔹 Card */
+.venue-card {
+  background: #111;
+  border-radius: 10px;
+  overflow: hidden;
+
+  border: 1px solid #222;
   transition: 0.2s;
 }
 
-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+.venue-card:hover {
+  transform: translateY(-4px);
 }
 
-.content {
-  background: #111;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid rgba(168, 85, 247, 0.2);
+/* 🔹 Image */
+.venue-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* 🔹 Content */
+.venue-content {
+  padding: 12px;
+}
+
+.location {
+  font-size: 12px;
+  color: #888;
+}
+
+.desc {
+  font-size: 13px;
+  color: #aaa;
+  margin: 8px 0;
+}
+
+/* 🔹 Details */
+.details {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.price {
+  color: #d4ff00;
+  font-weight: bold;
+}
+
+/* 🔹 Status */
+.status {
+  display: inline-block;
+  margin: 8px 0;
+  padding: 3px 8px;
+  font-size: 11px;
+  border-radius: 5px;
+}
+
+.status.APPROVED {
+  background: rgba(0,255,100,0.15);
+  color: #00ff88;
+}
+
+.status.PENDING {
+  background: rgba(255,200,0,0.15);
+  color: #ffcc00;
+}
+
+.status.REJECTED {
+  background: rgba(255,0,0,0.15);
+  color: #ff4d4d;
+}
+
+/* 🔹 Actions */
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.actions button {
+  flex: 1;
+  padding: 6px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* View */
+.actions button:nth-child(1) {
+  background: #333;
+  color: #fff;
+}
+
+/* Edit */
+.actions button:nth-child(2) {
+  background: #444;
+  color: #fff;
+}
+
+/* Delete */
+.actions .danger {
+  background: #ff4d4d;
+  color: #fff;
+}
+
+/* 🔹 Pagination */
+.pagination {
+  margin: 20px;
+  text-align: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+
+  background: #222;
+  color: #fff;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }

@@ -2,6 +2,7 @@ package com.bookmyvenue.common.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "venue_images")
@@ -22,6 +23,7 @@ public class VenueImage {
 
     // Many images belong to one venue
     @ManyToOne
-    @JoinColumn(name = "venue_id")
+    @JoinColumn(name = "venue_id", nullable = false)
+    @JsonIgnore
     private Venue venue;
 }

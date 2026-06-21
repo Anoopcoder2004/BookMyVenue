@@ -28,7 +28,7 @@ public class Venue {
 
     private String city;
 
-    private String address;
+    private String address; 
 
     private Double pricePerDay;
 
@@ -45,7 +45,7 @@ public class Venue {
 
     // Many venues belong to one user (owner)
     @ManyToOne
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
     // One venue can have many images
@@ -56,6 +56,9 @@ public class Venue {
     @OneToMany(mappedBy = "venue", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Booking> bookings;
+
+//     @OneToMany(mappedBy = "venue", cascade = CascadeType.ALL)
+// private List<VenueStatusHistory> statusHistory;
 
     // 🔥 Auto set createdAt
     @PrePersist
