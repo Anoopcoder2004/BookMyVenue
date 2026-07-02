@@ -4,35 +4,51 @@
     <h2>Welcome Back</h2>
     <p class="subtitle">Sign in to continue</p>
 
+    <!-- Email -->
     <div class="field">
-      <input 
-        type="email" 
-        placeholder="Email address"
-        [(ngModel)]="email"
-      />
+      <input
+        id="email"
+        type="email"
+        placeholder=" "
+        [(ngModel)]="email">
+
+      <label for="email">Email address</label>
     </div>
 
+    <!-- Password -->
     <div class="field">
-      <input 
+      <input
+        id="password"
         [type]="showPassword ? 'text' : 'password'"
-        placeholder="Password"
-        [(ngModel)]="password"
-      />
+        placeholder=" "
+        [(ngModel)]="password">
 
-      <button 
+      <label for="password">Password</label>
+
+      <button
+        class="password-toggle"
         type="button"
         (click)="togglePassword()"
-        aria-label="Toggle password"
-      >
-        <i class="bi" 
-           [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'">
+        aria-label="Toggle password">
+
+        <i
+          class="bi"
+          [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'">
         </i>
+
       </button>
     </div>
 
-    <button (click)="onLogin()" [disabled]="isLoading">
+    <button
+      class="login-btn"
+      (click)="onLogin()"
+      [disabled]="isLoading">
+
       {{ isLoading ? 'Logging in...' : 'Sign In' }}
+
     </button>
+ 
+
 
   </div>
 </div>

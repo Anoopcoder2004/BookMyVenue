@@ -1,0 +1,49 @@
+<div
+  *ngIf="toast && visible"
+  class="toast">
+
+  <div
+    class="icon"
+    [ngClass]="toast.type">
+
+    <ng-container [ngSwitch]="toast.type">
+
+      <span *ngSwitchCase="'success'">✓</span>
+
+      <span *ngSwitchCase="'error'">✕</span>
+
+      <span *ngSwitchCase="'warning'">!</span>
+
+      <span *ngSwitchDefault>i</span>
+
+    </ng-container>
+
+  </div>
+
+  <div class="content">
+
+    <div class="title">
+      {{ toast.title }}
+    </div>
+
+    <div class="message">
+      {{ toast.message }}
+    </div>
+
+  </div>
+
+  <button
+    class="close-btn"
+    type="button"
+    (click)="close()">
+
+    ✕
+
+  </button>
+
+  <div
+    class="progress"
+    [style.width.%]="progress">
+  </div>
+
+</div>

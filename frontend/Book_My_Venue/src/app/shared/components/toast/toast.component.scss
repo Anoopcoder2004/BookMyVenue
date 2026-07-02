@@ -1,0 +1,202 @@
+:host {
+
+    position: fixed;
+
+    top: 24px;
+
+    right: 24px;
+
+    z-index: 9999;
+
+    animation: slideIn .35s ease;
+}
+
+.toast {
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 14px;
+
+    width: 360px;
+
+    padding: 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e8e8e8;
+
+    border-radius: 18px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.icon {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+    width: 34px;
+
+    height: 34px;
+
+    border-radius: 50%;
+
+    font-weight: 700;
+
+    color: white;
+}
+
+.success {
+
+    background: #00A699;
+}
+
+.error {
+
+    background: #FF385C;
+}
+
+.warning {
+
+    background: #FFB400;
+}
+
+.info {
+
+    background: #4A90E2;
+}
+
+.content {
+
+    flex: 1;
+}
+
+.title {
+
+    margin-bottom: 4px;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #222;
+}
+
+.message {
+
+    font-size: 14px;
+
+    line-height: 1.45;
+
+    color: #717171;
+}
+
+.close-btn {
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    color: #999;
+
+    font-size: 16px;
+
+    transition: .2s;
+}
+
+.close-btn:hover {
+
+    color: #222;
+}
+
+.progress {
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: 0;
+
+    height: 3px;
+
+    background: #FF385C;
+
+    transition: width .02s linear;
+}
+
+@keyframes slideIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-20px) scale(.97);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+    }
+}
+// @media (max-width: 480px) {
+
+//     :host {
+
+//         top: 16px;
+
+//         left: 50%;
+
+//         right: auto;
+
+//         transform: translateX(-50%);
+
+//     }
+
+//     .toast {
+
+//         width: 320px;
+
+//         max-width: calc(100vw - 32px);
+
+//     }
+
+// }
+
+@media (max-width: 480px) {
+
+    :host {
+
+        top: 16px;
+
+        right: 16px;
+
+        left: auto;
+
+    }
+
+    .toast {
+
+        /* ✅ Changed */
+        width: 60vw;
+
+        /* ✅ Changed */
+        max-width: 60vw;
+
+    }
+
+}

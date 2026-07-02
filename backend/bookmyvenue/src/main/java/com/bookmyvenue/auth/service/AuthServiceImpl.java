@@ -42,8 +42,11 @@ public class AuthServiceImpl implements AuthService {
 
         userRepository.save(user);
 
-        String token = jwtUtil.generateToken(user.getId(), user.getRole().name());
-
+String token = jwtUtil.generateToken(
+        user.getEmail(),   // ⭐ added
+        user.getId(),
+        user.getRole().name()
+);
         AuthResponse authResponse = new AuthResponse(
                 token,
                 user.getId(),
@@ -80,8 +83,11 @@ public ApiResponse<AuthResponse> login(LoginRequest request) {
 
     System.out.println("✔ PASSWORD MATCHED");
 
-    String token = jwtUtil.generateToken(user.getId(), user.getRole().name());
-
+String token = jwtUtil.generateToken(
+        user.getEmail(),   // ⭐ added
+        user.getId(),
+        user.getRole().name()
+);
     System.out.println("✔ TOKEN GENERATED");
 
     return new ApiResponse<>(

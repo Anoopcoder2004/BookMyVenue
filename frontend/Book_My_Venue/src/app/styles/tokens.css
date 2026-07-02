@@ -1,0 +1,21 @@
+:root {
+    /* Brand */
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+
+    /* Typography */
+    --font-family: "Inter", sans-serif;
+
+    /* Radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+
+    /* Spacing */
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+
+    /* Transition */
+    --transition: 250ms ease;
+}

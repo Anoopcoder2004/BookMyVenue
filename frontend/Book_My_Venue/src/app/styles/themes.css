@@ -1,0 +1,41 @@
+:root {
+  /* Airbnb Brand */
+  --primary: #FF385C;
+  --primary-hover: #E31C5F;
+
+  /* Light */
+  --background: #ffffff;
+  --surface: #ffffff;
+
+  --text-primary: #222222;
+  --text-secondary: #717171;
+
+  --border: #DDDDDD;
+
+  --input-bg: #ffffff;
+
+  --primary-text: white;
+
+  --shadow: 0 6px 24px rgba(0,0,0,.08);
+
+  --radius:16px;
+
+  --transition:.25s ease;
+}
+
+[data-theme="dark"]{
+
+    --background:#161616;
+
+    --surface:#222222;
+
+    --text-primary:#ffffff;
+
+    --text-secondary:#B0B0B0;
+
+    --border:#3A3A3A;
+
+    --input-bg:#2B2B2B;
+
+    --shadow:0 10px 30px rgba(0,0,0,.4);
+}

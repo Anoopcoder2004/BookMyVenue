@@ -20,7 +20,14 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate bookingDate;
+    // ✅ DAILY support
+    private LocalDate startDate;
+    private LocalDate endDate;
+
+    // ✅ HOURLY support
+    @ManyToOne
+    @JoinColumn(name = "timeslot_id")
+    private TimeSlot timeSlot;
 
     private Double totalAmount;
 
@@ -29,19 +36,14 @@ public class Booking {
 
     private LocalDateTime createdAt;
 
-    // 🔗 RELATIONSHIPS
-
-    // Many bookings belong to one user
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    // Many bookings belong to one venue
     @ManyToOne
     @JoinColumn(name = "venue_id", nullable = false)
     private Venue venue;
 
-    // 🔥 Auto set values before insert
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();

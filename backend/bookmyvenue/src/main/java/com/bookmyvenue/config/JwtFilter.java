@@ -5,19 +5,20 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+// import org.springframework.security.core.authority.SimpleGrantedAuthority; ❌ ⭐ REMOVED
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.List;
+// import java.util.List; ❌ ⭐ REMOVED
 
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
+    private final CustomUserDetailsService userService; // ⭐ ALREADY CORRECT
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -29,20 +30,17 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String path = request.getServletPath();
 
-        // 🔥 IMPROVED: skip more public endpoints
         if (path.startsWith("/auth/") ||
                 path.startsWith("/uploads") ||
                 path.startsWith("/error") ||
                 path.startsWith("/v3/api-docs") ||
-                path.startsWith("/swagger-ui"))
+                path.startsWith("/swagger-ui")) {
 
-        {
             System.out.println("✔ SKIPPING JWT FILTER FOR PUBLIC ENDPOINT");
             filterChain.doFilter(request, response);
             return;
         }
 
-        // 🔥 NEW: Get token from cookie
         String token = getTokenFromHeader(request);
 
         if (token == null) {
@@ -50,50 +48,50 @@ public class JwtFilter extends OncePerRequestFilter {
         }
 
         if (token != null) {
-            System.out.println("✔ TOKEN FOUND (COOKIE)");
+            System.out.println("✔ TOKEN FOUND");
 
-            try { // 🔥 NEW: Exception safety added
-
+            try {
                 if (jwtUtil.isValid(token)) {
                     System.out.println("✔ TOKEN VALID");
 
-                    Long userId = jwtUtil.extractUserId(token);
-                    String role = jwtUtil.extractRole(token);
+                    // ⭐ NEW: Extract username (email)
+                    String username = jwtUtil.extractUsername(token);
 
-                    // ❌ REMOVED: Not needed, SecurityContext is source of truth
-                    // request.setAttribute("userId", userId);
-                    // request.setAttribute("role", role);
+                    // ⭐ NEW: Load full user details from DB
+                    CustomUserDetails userDetails =
+                            (CustomUserDetails) userService.loadUserByUsername(username);
 
-                    // 🔥 Convert role → ROLE_XXX
-                    SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
+                    // ⭐ NEW: Create auth using userDetails (NOT userId)
+                    UsernamePasswordAuthenticationToken auth =
+                            new UsernamePasswordAuthenticationToken(
+                                    userDetails,
+                                    null,
+                                    userDetails.getAuthorities()
+                            );
 
-                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                            userId,
-                            null,
-                            List.of(authority));
-
-                    // 🔥 NEW: Prevent overriding existing authentication
+                    // ⭐ SAME CHECK (kept)
                     if (SecurityContextHolder.getContext().getAuthentication() == null) {
                         SecurityContextHolder.getContext().setAuthentication(auth);
-                        System.out.println("🔥 AUTH SET: " + auth.getAuthorities());
+
+                        // ⭐ UPDATED LOG
+                        System.out.println("🔥 AUTH SET FOR USER: " + userDetails.getUsername());
                     }
 
                 } else {
                     System.out.println("❌ INVALID TOKEN");
                 }
 
-            } catch (Exception e) { // 🔥 NEW: handle malformed token
+            } catch (Exception e) {
                 System.out.println("❌ JWT ERROR: " + e.getMessage());
             }
 
         } else {
-            System.out.println("⚠️ NO TOKEN PROVIDED (COOKIE)");
+            System.out.println("⚠️ NO TOKEN PROVIDED");
         }
 
         filterChain.doFilter(request, response);
     }
 
-    // 🔥 SAME (GOOD): Extract JWT from cookie
     private String getTokenFromCookie(HttpServletRequest request) {
         if (request.getCookies() == null)
             return null;
@@ -110,7 +108,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            return authHeader.substring(7); // remove "Bearer "
+            return authHeader.substring(7);
         }
         return null;
     }
